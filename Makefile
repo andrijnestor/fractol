@@ -6,7 +6,7 @@
 #    By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 13:19:27 by anestor           #+#    #+#              #
-#    Updated: 2018/01/29 20:57:20 by anestor          ###   ########.fr        #
+#    Updated: 2018/01/30 21:34:40 by anestor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ EXT = fractol.h
 
 SRC =
 SRC += main.c
+SRC += image.c
+SRC += colors.c
+
 
 OBJ        = $(patsubst %.c,obj/%.o,$(SRC))
 .SILENT:
