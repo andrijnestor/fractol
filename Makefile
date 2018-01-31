@@ -6,7 +6,7 @@
 #    By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 13:19:27 by anestor           #+#    #+#              #
-#    Updated: 2018/01/30 21:34:40 by anestor          ###   ########.fr        #
+#    Updated: 2018/01/31 14:51:54 by anestor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =
 SRC += main.c
 SRC += image.c
 SRC += colors.c
+SRC += mandelbrot.c
 
 
 OBJ        = $(patsubst %.c,obj/%.o,$(SRC))
@@ -27,7 +28,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(EXT)
 	@make -C libft/
-	@gcc $(FLAGS) -L libft/ -lft -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit obj/*.o -o $(NAME) -g
+	@gcc $(FLAGS) -L libft/ -lft -L/usr/local/lib -lmlx -lpthread -framework OpenGL -framework AppKit obj/*.o -o $(NAME) -g
 
 obj/%.o: %.c $(EXT)
 	@mkdir -p obj

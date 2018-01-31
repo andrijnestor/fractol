@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/30 23:39:47 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 15:19:31 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define WIN_H 1000
 # define WIN_W 1000
 # define DEPTH 1000
+# define THREADS 8
+
+typedef struct	s_imre
+{
+	double		im;
+	double		re;
+}				t_imre;
 
 typedef struct	s_ftl
 {
@@ -42,10 +49,20 @@ typedef struct	s_ftl
 	int			winH;
 	int			winW;
 	int			colDepth;
+	int			core;
 }				t_ftl;
 
 t_ftl			*ftl_init(void);
 void			create_xpm(t_ftl *ftl);
+
+
+void	xpm_pixel_put(t_ftl *ftl, int x, int y, int col);
+
+/*
+** mandelbrot
+*/
+
+void	put_mandelbrot(t_ftl *ftl);
 
 /*
 ** colors
