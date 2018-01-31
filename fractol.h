@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 15:19:31 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:18:56 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # include <pthread.h>
 # include "libft/libft.h"
 # include <stdio.h>//
-# include <time.h>
-# define COLOR_N 100
-# define WIN_H 1000
-# define WIN_W 1000
-# define DEPTH 1000
+# include <time.h> //
+# define COLOR_N 256
+# define COLOR_RANGE 10
+# define WIN_H 800
+# define WIN_W 800
 # define THREADS 8
 
 typedef struct	s_imre
@@ -49,14 +49,20 @@ typedef struct	s_ftl
 	int			winH;
 	int			winW;
 	int			colDepth;
+	int			colRange;
 	int			core;
 }				t_ftl;
 
 t_ftl			*ftl_init(void);
+
+/*
+** images
+*/
+
 void			create_xpm(t_ftl *ftl);
+void			xpm_pixel_put(t_ftl *ftl, int x, int y, int col);
+void			put_image(t_ftl *ftl);
 
-
-void	xpm_pixel_put(t_ftl *ftl, int x, int y, int col);
 
 /*
 ** mandelbrot

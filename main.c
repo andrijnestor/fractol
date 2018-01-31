@@ -6,13 +6,11 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:00 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 15:19:40 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:10:22 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	put_image(t_ftl *ftl);
 
 int		color_grad(int start, int end, double perc)
 {
@@ -50,32 +48,40 @@ double	test_color(int i, t_ftl *ftl)
 	return (fmod(k * ftl->colDepth, 1.0));
 }
 
-void	xpm_pixel_put(t_ftl *ftl, int x, int y, int col)
-{
-	char	*tmp;
-
-	ft_memcpy(&ftl->xpm[y + COLOR_N + 1][x * 2], "  ", 2);
-	if (col < ftl->maxIter)
-	{
-		tmp = ft_itoa(col * 4 % 100);
-		ft_memcpy(&ftl->xpm[y + COLOR_N + 1][x * 2], tmp, ft_strlen(tmp));
-		free(tmp);
-	}
-}
-
 int		key_hooks(int keycode, t_ftl *ftl)
 {
 	(void)ftl;
 	if (keycode == 124)
-		ftl->moveX += 0.05 / ftl->zoom;
+		ftl->moveX += 0.1 / ftl->zoom;
 	if (keycode == 123)
-		ftl->moveX -= 0.05 / ftl->zoom;
+		ftl->moveX -= 0.1 / ftl->zoom;
 	if (keycode == 126)
-		ftl->moveY -= 0.05 / ftl->zoom;
+		ftl->moveY -= 0.1 / ftl->zoom;
 	if (keycode == 125)
-		ftl->moveY += 0.05 / ftl->zoom;
+		ftl->moveY += 0.1 / ftl->zoom;
 	if (keycode == 69)
 		ftl->zoom *= 1.1;
+	if (keycode == 18)
+		ftl->maxIter -= 10;
+	if (keycode == 19)
+		ftl->maxIter += 10;
+	if (keycode == 20)
+		ftl->colDepth--;
+	if (keycode == 21)
+		ftl->colDepth++;
+	if (keycode == 23)
+	{
+		if (ftl->colRange > 1)
+		{
+			ftl->colRange--;
+			color_range_init(ftl);
+		}
+	}
+	if (keycode == 22)
+	{
+		ftl->colRange++;
+		color_range_init(ftl);
+	}
 	if (keycode == 78)
 		ftl->zoom /= 1.1;
 	if (keycode == 53)
@@ -92,14 +98,10 @@ int		key_hooks(int keycode, t_ftl *ftl)
 	end = clock();
 	printf("Image time: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
 
+	printf("colRange: %d\n", ftl->colRange);
+	printf("iter: %d\n", ftl->maxIter);
 	printf("k: %d\n", keycode);
 	return (0);
-}
-
-void	put_image(t_ftl *ftl)
-{
-	ftl->img = mlx_xpm_to_image(ftl->mlx, ftl->xpm, &ftl->winW,  &ftl->winH);	
-	mlx_put_image_to_window(ftl->mlx, ftl->win, ftl->img, 0, 0);
 }
 
 void	print_xpm(t_ftl *ftl)
@@ -143,6 +145,7 @@ t_ftl	*ftl_init(void)
 	ftl->moveX = -0.5;
 	ftl->moveY = 0;
 	ftl->maxIter = 50;
-	ftl->colDepth = 5;
+	ftl->colDepth = 2;
+	ftl->colRange = 1;
 	return(ftl);
 }

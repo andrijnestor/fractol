@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 13:41:38 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 15:17:10 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:16:42 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 
 int		iter_mandelbrot(t_ftl *ftl, double pr, double pi)
 {
-//	double	newRe;
-  // 	double	newIm;
-//	double	oldRe;
-//	double	oldIm;
 	t_imre	new;
 	t_imre	old;
 	int		i;
 
-//	newRe = 0;
-//	newIm = 0;
-//	oldRe = 0;
-//	oldIm = 0;
 	ft_bzero(&new, sizeof(t_imre));
 	ft_bzero(&old, sizeof(t_imre));
 	i = 0;
@@ -79,7 +71,8 @@ void	put_mandelbrot(t_ftl *ftl)
 	ftl->core = 0;
 	while (i != THREADS)
 	{
-		while (ftl->core != i);
+		while (ftl->core != i)
+			;
 		pthread_create(&tid[i], NULL, put_mandelbrot_per_core, ftl);
 		i++;
 	}

@@ -6,72 +6,12 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 17:31:46 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 01:02:50 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:20:44 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_pow(int nb, int pow)
-{
-	if (pow == 0)
-		return (1);
-	else
-		return (nb * ft_pow(nb, pow - 1));
-}
-
-char	*ft_ito_base(int value, int base)
-{
-	int		i;
-	char	*nbr;
-	int		neg;
-
-	i = 1;
-	neg = 0;
-	if (value < 0)
-	{
-		if (base == 10)
-			neg = 1;
-		value *= -1;
-	}
-	while (ft_pow(base, i) - 1 < value)
-		i++;
-	nbr = (char*)malloc(sizeof(nbr) * i);
-	nbr[i + neg] = '\0';
-	while (i-- > 0)
-	{
-		nbr[i + neg] = (value % base) + (value % base > 9 ? 'A' - 10 : '0');
-		value = value / base;
-	}
-	if (neg)
-		nbr[0] = '-';
-	return (nbr);
-}
-/*
-
-char	*ft_ito_base(int number, int base) //hz sho blia
-{
-	int		numb;
-	int		len;
-	char	*numbase;
-
-	if (base < 2 || base > 16)
-		return (NULL);
-	len = ft_num_len(number) - 2;
-	numb = ((number < 0) ? (number * -1) : (number));
-	if ((numbase = ft_strnew(len)) == NULL)
-		return (NULL);
-	while (len-- != -1)
-	{
-		numbase[len] = numb % base + ((numb % base > 9) ? ('7') : ('0'));
-		numb = numb / base;
-	}
-	if (number < 0)
-		numbase[0] = '-';
-	return (numbase);
-}
-
-*/
 static int	color_grad(int start, int end, double perc)
 {
 	if (start == end)
@@ -79,7 +19,7 @@ static int	color_grad(int start, int end, double perc)
 	return ((int)((double)start + (end - start) * perc));
 }
 
-int	rgb_grad(int c1, int c2, double perc)
+static int	rgb_grad(int c1, int c2, double perc)
 {
 	int r;
 	int g;
@@ -98,24 +38,36 @@ static void	color_range(int col1, int col2, t_ftl *ftl)
 	int		i;
 	char	*tmp;
 
-//	tmp = ft_strnew(6);
 	i = 1;
 	while (i != COLOR_N + 1)
 	{
-		tmp = ft_ito_base(rgb_grad(col1, col2, i / 100.0), 16);
-	//	tmp = "ffffff";
-	//	(void)col1;
-	//	(void)col2;
-//		printf("%s %f\n", tmp, i / 100.0);	
-//		sprintf(tmp, "%x", rgb_grad(col1, col2, i / 100.0));
+		tmp = ft_itoa_base_int(rgb_grad(col1, col2, (double)i / COLOR_N), 16);
 		ft_memcpy(&ftl->xpm[i][6], tmp, 6);
 		free(tmp);
 		i++;
 	}
-//	free(tmp);
 }
 
 void		color_range_init(t_ftl *ftl)
 {
-	color_range(0xFF0000, 0xFFFF00, ftl);
+	if (ftl->colRange % COLOR_RANGE == 1)
+		color_range(0xFF0000, 0xFFFF00, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 2)
+		color_range(0xFF0000, 0xFF0000, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 3)
+		color_range(0xFF0000, 0x00FFFF, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 4)
+		color_range(0x000000, 0xFFFFFF, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 5)
+		color_range(0x555555, 0x000000, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 6)
+		color_range(0x0000FF, 0xFFFF00, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 7)
+		color_range(0x00FF00, 0xFFFF00, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 8)
+		color_range(0x00FF00, 0x0000FF, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 9)
+		color_range(0x0000FF, 0xFFFFfF, ftl);
+	else if (ftl->colRange % COLOR_RANGE == 0)
+		color_range(0xFFFFFF, 0x00FF00, ftl);
 }

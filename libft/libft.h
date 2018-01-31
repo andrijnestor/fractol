@@ -6,7 +6,7 @@
 /*   By: anestor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 13:28:55 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/17 15:47:01 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 16:39:47 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void				ft_putnbr_base(long long int num, int base);
 int					ft_printf(const char *restrict format, ...);
 int					ft_count_words(char const *s, char c);
 int					ft_num_len(long long int num);
+char				*ft_itoa_base_int(int value, int base);
 
 #endif
