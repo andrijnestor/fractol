@@ -6,11 +6,48 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 17:31:46 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/30 23:39:48 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 01:02:50 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		ft_pow(int nb, int pow)
+{
+	if (pow == 0)
+		return (1);
+	else
+		return (nb * ft_pow(nb, pow - 1));
+}
+
+char	*ft_ito_base(int value, int base)
+{
+	int		i;
+	char	*nbr;
+	int		neg;
+
+	i = 1;
+	neg = 0;
+	if (value < 0)
+	{
+		if (base == 10)
+			neg = 1;
+		value *= -1;
+	}
+	while (ft_pow(base, i) - 1 < value)
+		i++;
+	nbr = (char*)malloc(sizeof(nbr) * i);
+	nbr[i + neg] = '\0';
+	while (i-- > 0)
+	{
+		nbr[i + neg] = (value % base) + (value % base > 9 ? 'A' - 10 : '0');
+		value = value / base;
+	}
+	if (neg)
+		nbr[0] = '-';
+	return (nbr);
+}
+/*
 
 char	*ft_ito_base(int number, int base) //hz sho blia
 {
@@ -34,7 +71,7 @@ char	*ft_ito_base(int number, int base) //hz sho blia
 	return (numbase);
 }
 
-
+*/
 static int	color_grad(int start, int end, double perc)
 {
 	if (start == end)
@@ -61,6 +98,7 @@ static void	color_range(int col1, int col2, t_ftl *ftl)
 	int		i;
 	char	*tmp;
 
+//	tmp = ft_strnew(6);
 	i = 1;
 	while (i != COLOR_N + 1)
 	{
@@ -69,10 +107,12 @@ static void	color_range(int col1, int col2, t_ftl *ftl)
 	//	(void)col1;
 	//	(void)col2;
 //		printf("%s %f\n", tmp, i / 100.0);	
+//		sprintf(tmp, "%x", rgb_grad(col1, col2, i / 100.0));
 		ft_memcpy(&ftl->xpm[i][6], tmp, 6);
 		free(tmp);
 		i++;
 	}
+//	free(tmp);
 }
 
 void		color_range_init(t_ftl *ftl)
