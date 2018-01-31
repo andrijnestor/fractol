@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 17:31:46 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 17:20:44 by anestor          ###   ########.fr       */
+/*   Updated: 2018/01/31 19:13:09 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void		color_range_init(t_ftl *ftl)
 	if (ftl->colRange % COLOR_RANGE == 1)
 		color_range(0xFF0000, 0xFFFF00, ftl);
 	else if (ftl->colRange % COLOR_RANGE == 2)
-		color_range(0xFF0000, 0xFF0000, ftl);
+		color_range(0xFF0000, 0xFFFFFF, ftl);
 	else if (ftl->colRange % COLOR_RANGE == 3)
-		color_range(0xFF0000, 0x00FFFF, ftl);
+		color_range(0x0055FF, 0xFFFFFF, ftl);
 	else if (ftl->colRange % COLOR_RANGE == 4)
 		color_range(0x000000, 0xFFFFFF, ftl);
 	else if (ftl->colRange % COLOR_RANGE == 5)

@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 13:41:38 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 22:15:04 by anestor          ###   ########.fr       */
+/*   Created: 2018/01/31 20:15:50 by anestor           #+#    #+#             */
+/*   Updated: 2018/01/31 20:24:06 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int		iter_mandelbrot(t_ftl *ftl, double pr, double pi)
+static int		iter_julia(t_ftl *ftl, double real, double imag)
 {
 	t_imre	new;
 	t_imre	old;
 	int		i;
 
-	ft_bzero(&new, sizeof(t_imre));
 	ft_bzero(&old, sizeof(t_imre));
+	new.re = real;
+	new.im = imag;
 	i = 0;
 	while (i < ftl->maxIter)
 	{
 		old.re = new.re;
 		old.im = new.im;
-		new.re = old.re * old.re - old.im * old.im + pr;
-		new.im = 2 * old.re * old.im + pi;
+		new.re = old.re * old.re - old.im * old.im + ftl->moveX;
+		new.im = 2 * old.re * old.im + ftl->moveY;
 		if ((new.re * new.re + new.im * new.im) > 4)
 			break ;
 		i++;
@@ -34,7 +35,7 @@ static int		iter_mandelbrot(t_ftl *ftl, double pr, double pi)
 	return (i);
 }
 
-static void		*put_mandelbrot_per_core(void *arg)
+static void		*put_julia_per_core(void *arg)
 {
 	t_imre	p;
 	int		x;
@@ -54,8 +55,7 @@ static void		*put_mandelbrot_per_core(void *arg)
 			p.re = p.re + ftl->moveX;
 			p.im = (y - ftl->winH / 2) / (0.5 * ftl->zoom * ftl->winH);
 			p.im = p.im + ftl->moveY;
-			xpm_pixel_put(ftl, x, y, iter_mandelbrot(ftl, p.re, p.im));
-			img_pixel_put(ftl, x, y, iter_mandelbrot(ftl, p.re, p.im));
+			xpm_pixel_put(ftl, x, y, iter_julia(ftl, p.re, p.im));
 			x++;
 		}
 		y++;
@@ -63,7 +63,7 @@ static void		*put_mandelbrot_per_core(void *arg)
 	pthread_exit(0);
 }
 
-void	put_mandelbrot(t_ftl *ftl)
+void	put_julia(t_ftl *ftl)
 {
 	int			i;
 	pthread_t	tid[THREADS];
@@ -74,7 +74,7 @@ void	put_mandelbrot(t_ftl *ftl)
 	{
 		while (ftl->core != i)
 			;
-		pthread_create(&tid[i], NULL, put_mandelbrot_per_core, ftl);
+		pthread_create(&tid[i], NULL, put_julia_per_core, ftl);
 		i++;
 	}
 	i = 0;
