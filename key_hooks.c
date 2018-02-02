@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 20:27:29 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 20:27:50 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/02 22:05:03 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int		key_hooks(int keycode, t_ftl *ftl)
 	if (keycode == 19)
 		ftl->maxIter += 10;
 	if (keycode == 20)
-		ftl->colDepth -= 10;
+		ftl->colDepth -= 1;
 	if (keycode == 21)
-		ftl->colDepth += 10;
+		ftl->colDepth += 1;
 	if (keycode == 23)
 	{
 		if (ftl->colRange > 1)
@@ -53,13 +53,20 @@ int		key_hooks(int keycode, t_ftl *ftl)
 //	mlx_clear_window(ftl->mlx, ftl->win);
 
 	clock_t begin = clock();
-//	put_mandelbrot(ftl);
-	put_julia(ftl);
+
+	mlx_destroy_image(ftl->mlx, ftl->img->image);
+	ft_memdel((void **)&ftl->img);
+	create_img(ftl);
+
+	put_mandelbrot(ftl);
+//	put_julia(ftl);
 	clock_t end = clock();
 	printf("Formula time: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
 	begin = clock();
-	mlx_destroy_image(ftl->mlx, ftl->img);
-	put_image(ftl);
+//	mlx_destroy_image(ftl->mlx, ftl->img);
+//	mlx_destroy_image(ftl->mlx, ftl->img->image);
+//	put_image(ftl);
+	put_img(ftl);
 	end = clock();
 	printf("Image time: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
 

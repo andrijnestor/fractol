@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:00 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 22:41:47 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/02 22:04:11 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_ftl	*ftl_init(void)
 	ftl->moveX = -0.5;
 	ftl->moveY = 0;
 	ftl->maxIter = 50;
-	ftl->colDepth = 100;
+	ftl->colDepth = 1;
 	ftl->colRange = 1;
 	return(ftl);
 }

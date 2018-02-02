@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/01/31 22:41:48 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/02 23:51:19 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define COLOR_RANGE 10
 # define WIN_H 600
 # define WIN_W 800
-# define THREADS 8
+# define THREADS 200
 
 typedef struct	s_imre
 {
@@ -82,7 +82,7 @@ void			put_image(t_ftl *ftl);
 */
 
 void			create_img(t_ftl *ftl);
-void			img_pixel_put(t_ftl *ftl, int x, int y, int col);
+void			img_pixel_put(t_ftl *ftl, int x, int y, int col, t_imre p);
 void			put_img(t_ftl *ftl);
 
 
