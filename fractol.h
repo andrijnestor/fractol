@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/02 23:51:19 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 03:24:49 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define COLOR_RANGE 10
 # define WIN_H 600
 # define WIN_W 800
-# define THREADS 200
+# define THREADS 8
 
 typedef struct	s_imre
 {
@@ -45,44 +45,58 @@ typedef struct	s_img
 	int			endian;
 }				t_img;
 
+typedef struct	s_mouse
+{
+	int			x;
+	int			y;
+	int			last_x;
+	int			last_y;
+	char		is_down;
+}				t_mouse;
+
 typedef struct	s_ftl
 {
 	void		*mlx;
 	void		*win;
 //	void		*img;
-	char		**xpm;
-	double		moveX;
-	double		moveY;
+//	char		**xpm;
+	int			type;
+	double		move_x;
+	double		move_y;
 	double		zoom;
-	int			maxIter;
-	int			winH;
-	int			winW;
-	int			colDepth;
-	int			colRange;
-	int			core;
-	t_img		*img;
+	int			max_iter;
+	int			win_h;
+	int			win_w;
+	int			thread;
+	int			col_depth;
+	int			col1;
+	int			col2;
+	t_img		img;
+	t_mouse		mouse;
 }				t_ftl;
 
 /*
 ** init
 */
 
-t_ftl			*ftl_init(void);
+void			fractol_make(char *name);
+void			fractol_put(t_ftl *ftl);
+t_ftl			*ftl_init(int type, char *name);
 
 /*
 ** images xpm
 */
 
-void			create_xpm(t_ftl *ftl);
-void			xpm_pixel_put(t_ftl *ftl, int x, int y, int col);
-void			put_image(t_ftl *ftl);
+//void			create_xpm(t_ftl *ftl);
+//void			xpm_pixel_put(t_ftl *ftl, int x, int y, int col);
+//void			put_image(t_ftl *ftl);
 
 /*
 ** images
 */
 
 void			create_img(t_ftl *ftl);
-void			img_pixel_put(t_ftl *ftl, int x, int y, int col, t_imre p);
+void			img_pixel_put(t_ftl *ftl, int x, int y, int col);
 void			put_img(t_ftl *ftl);
 
 
@@ -104,5 +118,8 @@ void			color_range_init(t_ftl *ftl);
 */
 
 int				key_hooks(int keycode, t_ftl *ftl);
+int				hook_mouse_down(int keycode, int x, int y, t_ftl *ftl);
+int				hook_mouse_up(int keycode, int x, int y, t_ftl *ftl);
+int				hook_mouse_move(int x, int y, t_ftl *ftl);
 
 #endif

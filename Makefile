@@ -6,7 +6,7 @@
 #    By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 13:19:27 by anestor           #+#    #+#              #
-#    Updated: 2018/02/02 23:53:55 by anestor          ###   ########.fr        #
+#    Updated: 2018/02/06 20:37:57 by anestor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,14 @@ EXT = fractol.h
 
 SRC =
 SRC += main.c
-SRC += image_xpm.c
+#SRC += image_xpm.c
 SRC += image.c
-SRC += colors.c
+#SRC += colors.c
 SRC += mandelbrot.c
 SRC += julia.c
 SRC += key_hooks.c
+SRC += mouse_hooks.c
+SRC += render.c
 
 
 OBJ        = $(patsubst %.c,obj/%.o,$(SRC))
