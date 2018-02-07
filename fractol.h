@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 03:24:49 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 16:50:03 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <pthread.h>
 # include "libft/libft.h"
 # include <stdio.h>//
-# include <time.h> //
 # define COLOR_N 256
 # define COLOR_RANGE 10
 # define WIN_H 600
@@ -58,8 +57,6 @@ typedef struct	s_ftl
 {
 	void		*mlx;
 	void		*win;
-//	void		*img;
-//	char		**xpm;
 	int			type;
 	double		move_x;
 	double		move_y;
@@ -84,21 +81,12 @@ void			fractol_put(t_ftl *ftl);
 t_ftl			*ftl_init(int type, char *name);
 
 /*
-** images xpm
-*/
-
-//void			create_xpm(t_ftl *ftl);
-//void			xpm_pixel_put(t_ftl *ftl, int x, int y, int col);
-//void			put_image(t_ftl *ftl);
-
-/*
 ** images
 */
 
 void			create_img(t_ftl *ftl);
 void			img_pixel_put(t_ftl *ftl, int x, int y, int col);
 void			put_img(t_ftl *ftl);
-
 
 /*
 ** fractals
@@ -108,12 +96,6 @@ void			put_mandelbrot(t_ftl *ftl);
 void			put_julia(t_ftl *ftl);
 
 /*
-** colors
-*/
-
-void			color_range_init(t_ftl *ftl);
-
-/*
 ** hooks
 */
 
@@ -121,5 +103,6 @@ int				key_hooks(int keycode, t_ftl *ftl);
 int				hook_mouse_down(int keycode, int x, int y, t_ftl *ftl);
 int				hook_mouse_up(int keycode, int x, int y, t_ftl *ftl);
 int				hook_mouse_move(int x, int y, t_ftl *ftl);
+int				exit_on_x(void *tmp);
 
 #endif

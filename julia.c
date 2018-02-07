@@ -6,13 +6,13 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 20:15:50 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 02:26:13 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 16:53:29 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int		iter_julia(t_ftl *ftl, double real, double imag)
+static int	iter_julia(t_ftl *ftl, double real, double imag)
 {
 	t_imre	new;
 	t_imre	old;
@@ -26,8 +26,10 @@ static int		iter_julia(t_ftl *ftl, double real, double imag)
 	{
 		old.re = new.re;
 		old.im = new.im;
-		new.re = old.re * old.re - old.im * old.im + ((double)(ftl->mouse.x - WIN_W / 2) / WIN_W);
-		new.im = 2 * old.re * old.im + ((double)(ftl->mouse.y - WIN_H / 2) / WIN_H);
+		new.re = old.re * old.re - old.im * old.im +
+			((double)(ftl->mouse.x - WIN_W / 2) / WIN_W);
+		new.im = 2 * old.re * old.im +
+			((double)(ftl->mouse.y - WIN_H / 2) / WIN_H);
 		if ((new.re * new.re + new.im * new.im) > 4)
 			break ;
 		i++;
@@ -35,7 +37,7 @@ static int		iter_julia(t_ftl *ftl, double real, double imag)
 	return (i);
 }
 
-static void		*put_julia_per_core(void *arg)
+static void	*put_julia_per_core(void *arg)
 {
 	t_imre	p;
 	int		x;
@@ -55,7 +57,6 @@ static void		*put_julia_per_core(void *arg)
 			p.re = p.re + ftl->move_x;
 			p.im = (y - ftl->win_h / 2) / (0.5 * ftl->zoom * ftl->win_h);
 			p.im = p.im + ftl->move_y;
-		//	xpm_pixel_put(ftl, x, y, iter_julia(ftl, p.re, p.im));
 			img_pixel_put(ftl, x, y, iter_julia(ftl, p.re, p.im));
 			x++;
 		}
@@ -64,7 +65,7 @@ static void		*put_julia_per_core(void *arg)
 	pthread_exit(0);
 }
 
-void	put_julia(t_ftl *ftl)
+void		put_julia(t_ftl *ftl)
 {
 	int				i;
 	pthread_t		tid[THREADS];

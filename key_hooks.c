@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 20:27:29 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 02:30:42 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 16:50:17 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,13 @@ int		key_hooks(int keycode, t_ftl *ftl)
 		ftl->type = (ftl->type + 1) % 2;
 	if (keycode == 53)
 		exit(0);
-//	mlx_clear_window(ftl->mlx, ftl->win);
-/*
-	clock_t begin = clock();
-
-	mlx_destroy_image(ftl->mlx, ftl->img.image);
-//	ft_memdel((void **)&ftl->img);
-	create_img(ftl);
-
-	if (ftl->type == 0)
-		put_mandelbrot(ftl);
-	else if (ftl->type == 1)
-		put_julia(ftl);
-//	put_julia(ftl);
-	clock_t end = clock();
-	printf("Formula time: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
-	begin = clock();
-//	mlx_destroy_image(ftl->mlx, ftl->img);
-//	mlx_destroy_image(ftl->mlx, ftl->img->image);
-//	put_image(ftl);
-	put_img(ftl);
-	end = clock();
-	printf("Image time: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
-
-	printf("colRange: %d\n", ftl->colRange);
-	printf("iter: %d\n", ftl->maxIter);
-	printf("k: %d\n", keycode);
-	return (0);
-	*/
 	fractol_put(ftl);
+	return (0);
+}
+
+int		exit_on_x(void *tmp)
+{
+	(void)tmp;
+	exit(1);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 13:41:38 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 03:27:11 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 16:52:45 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int		iter_mandelbrot(t_ftl *ftl, double pr, double pi)
+static int	iter_mandelbrot(t_ftl *ftl, double pr, double pi)
 {
 	t_imre	new;
 	t_imre	old;
@@ -34,7 +34,7 @@ static int		iter_mandelbrot(t_ftl *ftl, double pr, double pi)
 	return (i);
 }
 
-static void		*put_mandelbrot_per_core(void *arg)
+static void	*put_mandelbrot_per_core(void *arg)
 {
 	t_imre	p;
 	int		x;
@@ -52,7 +52,7 @@ static void		*put_mandelbrot_per_core(void *arg)
 		{
 			p.re = 1.5 * (x - ftl->win_w / 2) / (0.5 * ftl->zoom * ftl->win_w);
 			p.re = p.re + ftl->move_x;
-			p.im = (y - ftl->win_h/ 2) / (0.5 * ftl->zoom * ftl->win_h);
+			p.im = (y - ftl->win_h / 2) / (0.5 * ftl->zoom * ftl->win_h);
 			p.im = p.im + ftl->move_y;
 			img_pixel_put(ftl, x, y, iter_mandelbrot(ftl, p.re, p.im));
 			x++;
@@ -62,7 +62,7 @@ static void		*put_mandelbrot_per_core(void *arg)
 	pthread_exit(0);
 }
 
-void	put_mandelbrot(t_ftl *ftl)
+void		put_mandelbrot(t_ftl *ftl)
 {
 	int				i;
 	pthread_t		tid[THREADS];

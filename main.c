@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:00 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 03:04:57 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 16:54:07 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	fractol_make(char *name)
 	mlx_hook(ftl->win, 4, 0, hook_mouse_down, ftl);
 	mlx_hook(ftl->win, 5, 0, hook_mouse_up, ftl);
 	mlx_hook(ftl->win, 6, 0, hook_mouse_move, ftl);
+	mlx_hook(ftl->win, 17, 1L << 17, exit_on_x, NULL);
 	mlx_loop(ftl->mlx);
 }
 
@@ -76,5 +77,5 @@ t_ftl	*ftl_init(int type, char *name)
 	ftl->col_depth = 1;
 	ftl->col1 = 0xFF0000;
 	ftl->col2 = 0x00FFFF;
-	return(ftl);
+	return (ftl);
 }
