@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 16:50:03 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 22:01:54 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <pthread.h>
 # include "libft/libft.h"
 # include <stdio.h>//
-# define COLOR_N 256
-# define COLOR_RANGE 10
+//# define COLOR_N 256
+//# define COLOR_RANGE 10
 # define WIN_H 600
 # define WIN_W 800
 # define THREADS 8

@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 20:10:02 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 16:38:00 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/07 21:42:22 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 
 int		hook_mouse_down(int button, int x, int y, t_ftl *ftl)
 {
-	(void)x;
-	(void)y;
-
 	if (button == 4)
 	{
-		ftl->move_y -= (y) / (double)WIN_H * 1.5;
-		ftl->move_x -= (x) / (double)WIN_W * 1.5;
-		ftl->zoom *= 1.2;
+		ftl->move_y += (y - WIN_H / 2) / (double)WIN_W / ftl->zoom / 3;
+		ftl->move_x += (x - WIN_W / 2) / (double)WIN_H / ftl->zoom / 3;
+		ftl->zoom *= 1.1;
 	}
 	else if (button == 5)
 	{
-		ftl->move_y -= (y) / (double)WIN_H * 1.5;
-		ftl->move_x -= (x) / (double)WIN_W * 1.5;
-		ftl->zoom /= 1.2;
+		ftl->zoom /= 1.1;
 	}
 	ftl->mouse.is_down = button;
 	fractol_put(ftl);
@@ -51,8 +46,8 @@ int		hook_mouse_move(int x, int y, t_ftl *ftl)
 	ftl->mouse.y = y;
 	if (ftl->mouse.is_down == 1)
 	{
-		ftl->move_y += (ftl->mouse.last_y - y) / (double)WIN_H * 2;
-		ftl->move_x += (ftl->mouse.last_x - x) / (double)WIN_W * 3;
+		ftl->move_y += (ftl->mouse.last_y - y) / (double)WIN_H * 2 / ftl->zoom;
+		ftl->move_x += (ftl->mouse.last_x - x) / (double)WIN_W * 3 / ftl->zoom;
 	}
 	else if (ftl->mouse.is_down == 2)
 	{

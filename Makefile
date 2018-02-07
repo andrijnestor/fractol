@@ -6,12 +6,12 @@
 #    By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 13:19:27 by anestor           #+#    #+#              #
-#    Updated: 2018/02/07 16:35:21 by anestor          ###   ########.fr        #
+#    Updated: 2018/02/07 21:53:26 by anestor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
-FLAGS = -Wall -Wextra -Werror -O3 -g
+FLAGS = -Wall -Wextra -Werror -O3
 EXT = fractol.h
 
 SRC =
@@ -31,11 +31,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(EXT)
 	@make -C libft/
-	@gcc $(FLAGS) -L libft/ -lft -L/usr/local/lib -lmlx -lpthread -framework OpenGL -framework AppKit obj/*.o -o $(NAME)
+	@gcc $(FLAGS) -l pthread -L libft/ -lft -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit obj/*.o -o $(NAME)
 
 obj/%.o: %.c $(EXT)
 	@mkdir -p obj
-	@gcc $(FLAGS) -c $< -o $@
+	@gcc $(FLAGS)  -c $< -o $@
 	@echo "... compiling $< ..."
 
 clean:
