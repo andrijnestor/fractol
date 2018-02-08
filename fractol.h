@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:14:23 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 22:01:54 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/09 00:49:55 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define WIN_H 600
 # define WIN_W 800
 # define THREADS 8
+# define F_ZM ftl->zoom
 
 typedef struct	s_imre
 {
@@ -76,8 +77,9 @@ typedef struct	s_ftl
 ** init
 */
 
-void			fractol_make(char *name);
-void			fractol_put(t_ftl *ftl);
+int				ftl_usage(void);
+int				fractol_make(char *name);
+void			fractol_render(t_ftl *ftl);
 t_ftl			*ftl_init(int type, char *name);
 
 /*
@@ -94,6 +96,8 @@ void			put_img(t_ftl *ftl);
 
 void			put_mandelbrot(t_ftl *ftl);
 void			put_julia(t_ftl *ftl);
+void			put_ship(t_ftl *ftl);
+void			put_fractol(t_ftl *ftl);
 
 /*
 ** hooks

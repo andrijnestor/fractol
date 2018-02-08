@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 20:10:02 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 21:42:22 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/09 00:16:21 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		hook_mouse_down(int button, int x, int y, t_ftl *ftl)
 		ftl->zoom /= 1.1;
 	}
 	ftl->mouse.is_down = button;
-	fractol_put(ftl);
+	fractol_render(ftl);
 	return (0);
 }
 
@@ -64,6 +64,6 @@ int		hook_mouse_move(int x, int y, t_ftl *ftl)
 //		render(fdf);
 	}
 	printf("x: %d y: %d\n", ftl->mouse.x, ftl->mouse.y);
-	fractol_put(ftl);
+	fractol_render(ftl);
 	return (0);
 }

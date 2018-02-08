@@ -6,7 +6,7 @@
 /*   By: anestor <anestor@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 20:27:29 by anestor           #+#    #+#             */
-/*   Updated: 2018/02/07 16:50:17 by anestor          ###   ########.fr       */
+/*   Updated: 2018/02/09 00:34:52 by anestor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ int		key_hooks(int keycode, t_ftl *ftl)
 	if (keycode == 21)
 		ftl->col_depth += 1;
 	if (keycode == 23)
-		ftl->col1 = (int)(ftl->col1 * 1.1) % 0xFFFFFF;
+		ftl->col1 = (int)(ftl->col1 * 1.5) % 0xFFFFFF;
 	if (keycode == 22)	
-		ftl->col2 = (int)(ftl->col2 * 1.1) % 0xFFFFFF;
+		ftl->col2 = (int)(ftl->col2 * 1.5) % 0xFFFFFF;
 	if (keycode == 78 || keycode == 27)
 		ftl->zoom /= 1.1;
 	if (keycode == 48)
-		ftl->type = (ftl->type + 1) % 2;
+		ftl->type = (ftl->type + 1) % 3;
 	if (keycode == 53)
 		exit(0);
-	fractol_put(ftl);
+	fractol_render(ftl);
 	return (0);
 }
 
